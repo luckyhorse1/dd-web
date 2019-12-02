@@ -68,6 +68,7 @@
 <script>
   import {isvalidUsername} from '@/utils/validate'
   import login_center_bg from '@/assets/images/login_center_bg.png'
+  import {login} from '@/api/login'
   export default {
     name: 'login',
     data() {
@@ -124,7 +125,11 @@
         this.$refs.form.validate(valid => {
           if (valid) {
             this.loading = true;
-            console.log('haha')
+            login(this.loginForm.username, this.loginForm.password).then(response => {
+              const data = response.data
+              console.log(response)
+              console.log(data)
+            })
           } else {
             console.log('error')
             return false
