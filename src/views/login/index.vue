@@ -125,13 +125,15 @@
         this.$refs.form.validate(valid => {
           if (valid) {
             this.loading = true;
-            login(this.loginForm.username, this.loginForm.password).then(response => {
-              const data = response.data
-              console.log(response)
-              console.log(data)
+            console.log('before login')
+            this.$store.dispatch('Login', this.loginForm).then(() => {
+              this.loading = false
+              this.$router.push({path: '/'})
+            }).catch(() => {
+              this.loading = false
             })
           } else {
-            console.log('error')
+            console.log('参数验证不合法')
             return false
           }
         })
