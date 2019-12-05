@@ -16,7 +16,6 @@ const user = {
     Login({ commit }, userInfo){
       return new Promise((resolve, reject) => {
         login(userInfo.username, userInfo.password).then(response => {
-          console.log('haha')
           const data = response.data
           const tokenStr = data.tokenHead+data.token
           setToken(tokenStr)
@@ -25,6 +24,14 @@ const user = {
         }).catch(errot => {
           reject(error)
         })
+      })
+    },
+
+    Logout({ commit }) {
+      return new Promise(resolve => {
+        commit('SET_TOKEN', '')
+        removeToken()
+        resolve()
       })
     }
 

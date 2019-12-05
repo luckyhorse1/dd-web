@@ -125,7 +125,6 @@
         this.$refs.form.validate(valid => {
           if (valid) {
             this.loading = true;
-            console.log('before login')
             this.$store.dispatch('Login', this.loginForm).then(() => {
               this.loading = false
               this.$router.push({path: '/'})
