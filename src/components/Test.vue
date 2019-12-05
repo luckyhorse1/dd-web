@@ -21,7 +21,7 @@ export default {
       this.$store.dispatch('GetInfo')
     },
     logout() {
-      this.$store.dispatch('FedLogout')
+      this.$store.dispatch('Logout')
     }
 
   }

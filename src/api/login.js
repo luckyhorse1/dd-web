@@ -10,3 +10,10 @@ export function login(phone, password) {
     }
   })
 }
+
+export function getInfo () {
+  return request({
+    url: 'user/info',
+    method: 'post'
+  })
+}
