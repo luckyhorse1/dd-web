@@ -9,11 +9,10 @@
       <div style="text-align: center">
         <svg-icon icon-class="login-mall" style="width: 56px; height: 56px; color: #409EFF"></svg-icon>
       </div>
-      <h2 class="login-title color-main">dd-web</h2>
-        <el-form-item prop="username">
-          <el-input name="username"
-                    type="text"
-                    v-model="loginForm.username"
+      <h2 class="login-title color-main">登录</h2>
+        <el-form-item prop="phone">
+          <el-input type="text"
+                    v-model="loginForm.phone"
                     autocomplete="on"
                     placeholder="请输入用户名">
             <span slot="prefix">
@@ -22,8 +21,7 @@
           </el-input>
         </el-form-item>
         <el-form-item prop="password">
-          <el-input name="password"
-                    :type="pwdType"
+          <el-input :type="pwdType"
                     @keyup.enter.native="handleLogin"
                     v-model="loginForm.password"
                     autocomplete="on"
@@ -40,59 +38,44 @@
           <el-button style="width: 45%" type="primary" :loading="loading" @click.native.prevent="handleLogin">
             登录
           </el-button>
-          <el-button style="width: 45%" type="primary" @click.native.prevent="handleTry">
-            获取体验账号
+          <el-button style="width: 45%" type="primary" @click.native.prevent="handleRegister">
+            注册
           </el-button>
         </el-form-item>
       </el-form>
     </el-card>
     <img :src="login_center_bg" class="login-center-layout">
-    <el-dialog
-      title="公众号二维码"
-      :visible.sync="dialogVisible"
-      :show-close="false"
-      :center="true"
-      width="30%">
-      <div style="text-align: center">
-        <span class="font-title-large"><span class="color-main font-extra-large">关注公众号</span>回复<span class="color-main font-extra-large">体验</span>获取体验账号</span>
-        <br>
-        <img src="http://macro-oss.oss-cn-shenzhen.aliyuncs.com/mall/banner/qrcode_for_macrozheng_258.jpg" width="160" height="160" style="margin-top: 10px">
-      </div>
-      <span slot="footer" class="dialog-footer">
-        <el-button type="primary" @click="dialogConfirm">确定</el-button>
-      </span>
-    </el-dialog>
   </div>
 </template>
 
 <script>
-  import {isvalidUsername} from '@/utils/validate'
+  import {isvalidPhone, isvalidPassword} from '@/utils/validate'
   import login_center_bg from '@/assets/images/login_center_bg.png'
-  import {login} from '@/api/login'
+
   export default {
     name: 'login',
     data() {
-      const validateUsername = (rule, value, callback) => {
-        if (!isvalidUsername(value)) {
-          callback(new Error('请输入正确的用户名'))
+      const validatePhone = (rule, value, callback) => {
+        if (!isvalidPhone(value)) {
+          callback(new Error('请输入正确的手机号'))
         } else {
           callback()
         }
       };
       const validatePass = (rule, value, callback) => {
-        if (value.length < 3) {
-          callback(new Error('密码不能小于3位'))
+        if (!isvalidPassword(value)) {
+          callback(new Error('请输入6-16位字母和数字的组合'))
         } else {
           callback()
         }
       };
       return {
         loginForm: {
-          username: '',
+          phone: '',
           password: '',
         },
         loginRules: {
-          username: [{required: true, trigger: 'blur', validator: validateUsername}],
+          phone: [{required: true, trigger: 'blur', validator: validatePhone}],
           password: [{required: true, trigger: 'blur', validator: validatePass}]
         },
         loading: false,
@@ -106,8 +89,8 @@
     created() {
       //this.loginForm.username = getCookie("username");
       //this.loginForm.password = getCookie("password");
-      if(this.loginForm.username === undefined||this.loginForm.username==null||this.loginForm.username===''){
-        this.loginForm.username = 'admin';
+      if(this.loginForm.phone === undefined||this.loginForm.phone==null||this.loginForm.phone===''){
+        this.loginForm.phone = 'admin';
       }
       if(this.loginForm.password === undefined||this.loginForm.password==null){
         this.loginForm.password = '';
@@ -124,7 +107,7 @@
       handleLogin() {
         this.$refs.form.validate(valid => {
           if (valid) {
-            this.loading = true;
+            this.loading = true
             this.$store.dispatch('Login', this.loginForm).then(() => {
               this.loading = false
               this.$router.push({path: '/'})
@@ -137,16 +120,8 @@
           }
         })
       },
-      handleTry(){
-        this.dialogVisible =true
-      },
-      dialogConfirm(){
-        this.dialogVisible =false;
-        setSupport(true);
-      },
-      dialogCancel(){
-        this.dialogVisible = false;
-        setSupport(false);
+      handleRegister(){
+        this.$router.push({path: '/register'})
       }
     }
   }

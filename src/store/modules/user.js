@@ -25,7 +25,7 @@ const user = {
           setToken(tokenStr)
           commit('SET_TOKEN', tokenStr)
           resolve()
-        }).catch(errot => {
+        }).catch(error => {
           reject(error)
         })
       })
