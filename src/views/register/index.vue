@@ -13,7 +13,7 @@
           </el-input>
         </el-form-item>
         <el-form-item prop="phonecode">
-          <el-input type="text" v-model="registerForm.phonecode" placeholder="请输入验证码">
+          <el-input type="text" v-model="registerForm.phoneCode" placeholder="请输入验证码">
             <template slot="prepend">验证码</template>
             <el-button :disabled="disable" slot="append" @click="getCode"  style="background-color: #409EFF; color: white">{{getCodeText}}</el-button>
           </el-input>
@@ -36,7 +36,7 @@
 
 
         <el-form-item style="text-align: center">
-          <el-button type="primary">同意并注册</el-button>
+          <el-button type="primary" @click="checkCode">同意并注册</el-button>
         </el-form-item>
       </el-form>
     </el-card>
@@ -46,6 +46,7 @@
 <script>
   import {isvalidPhone, isvalidPhonecode, isvalidPassword} from '../../utils/validate'
   import {Message} from 'element-ui'
+  import {getPhoneCode, checkPhoneCode} from '../../api/register'
 
   export default {
     name: 'register',
@@ -95,14 +96,14 @@
         disable: false,
         registerForm: {
           phone: '',
-          phonecode: '',
+          phoneCode: '',
           name: '',
           password: '',
           password2: ''
         },
         registerRules: {
           phone: [{required: true, trigger: 'blur', validator: validatePhone}],
-          phonecode: [{required: true, trigger: 'blur', validator: validatePhonecode}],
+          phoneCode: [{required: true, trigger: 'blur', validator: validatePhonecode}],
           name: [{required: true, trigger: 'blur', validator: validateName}],
           password: [{required: true, trigger: 'blur', validator: validatePassword}],
           password2: [{required: true, trigger: 'blur', validator: validatePassword2}]
@@ -121,6 +122,12 @@
           return
         }
 
+        getPhoneCode(this.registerForm.phone).then(response => {
+          console.log(response.data)
+        }).catch(() => {
+          console.log('error')
+        })
+
         var countDown = setInterval(() => {
           if (this.count < 1) {
             this.disable = false
@@ -132,6 +139,12 @@
             this.getCodeText = this.count-- + 's后重发'
           }
         }, 1000)
+      },
+
+      checkCode() {
+        checkPhoneCode(this.registerForm.phone, this.registerForm.phoneCode).then(response => {
+          console.log(response.data)
+        })
       }
     }
   }
