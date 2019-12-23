@@ -24,19 +24,19 @@
           </el-input>
         </el-form-item>
         <el-form-item prop="password">
-          <el-input type="text" v-model="registerForm.password" placeholder="请输入密码">
+          <el-input type="password" v-model="registerForm.password" placeholder="请输入密码">
             <template slot="prepend">&nbsp;&nbsp;&nbsp;&nbsp;密码</template>
           </el-input>
         </el-form-item>
         <el-form-item prop="password2">
-          <el-input type="text" v-model="registerForm.password2"placeholder="再次输入密码">
+          <el-input type="password" v-model="registerForm.password2"placeholder="再次输入密码">
             <template slot="prepend">&nbsp;&nbsp;&nbsp;&nbsp;确认</template>
           </el-input>
         </el-form-item>
 
 
         <el-form-item style="text-align: center">
-          <el-button type="primary" @click="checkCode">同意并注册</el-button>
+          <el-button type="primary" @click.native.prevent="acceptAndRegister">同意并注册</el-button>
         </el-form-item>
       </el-form>
     </el-card>
@@ -46,7 +46,7 @@
 <script>
   import {isvalidPhone, isvalidPhonecode, isvalidPassword} from '../../utils/validate'
   import {Message} from 'element-ui'
-  import {getPhoneCode, checkPhoneCode} from '../../api/register'
+  import {getPhoneCode, checkPhoneCode, register} from '../../api/register'
 
   export default {
     name: 'register',
@@ -141,9 +141,13 @@
         }, 1000)
       },
 
-      checkCode() {
-        checkPhoneCode(this.registerForm.phone, this.registerForm.phoneCode).then(response => {
-          console.log(response.data)
+      acceptAndRegister() {
+        register(this.registerForm.phone, this.registerForm.password, this.registerForm.phoneCode, this.registerForm.name).then(response => {
+          this.$message({
+            message: '注册成功',
+            type: 'success'
+          })
+          this.$router.push({path: '/login'})
         })
       }
     }
