@@ -19,7 +19,7 @@ const user = {
   actions: {
     Login({ commit }, userInfo){
       return new Promise((resolve, reject) => {
-        login(userInfo.username, userInfo.password).then(response => {
+        login(userInfo.phone, userInfo.password).then(response => {
           const data = response.data
           const tokenStr = data.tokenHead+data.token
           setToken(tokenStr)
