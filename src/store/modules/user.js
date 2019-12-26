@@ -34,7 +34,6 @@ const user = {
     GetInfo({ commit }) {
       return new Promise((resolve, reject) => {
         getInfo().then(response => {
-          console.log(response.data.name)
           commit('SET_NAME', response.data.name)
           resolve()
         })
