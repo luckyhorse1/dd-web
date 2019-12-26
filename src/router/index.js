@@ -15,7 +15,8 @@ export default new Router({
       children: [{
         path: 'home',
         name: 'home',
-        component: () => import('@/components/Test.vue')
+        component: () => import('@/components/Test.vue'),
+        meta: {title: '首页', icon: 'home'}
       }]
     }
 

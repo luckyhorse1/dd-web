@@ -4,7 +4,8 @@ import {getToken, setToken, removeToken} from '@/utils/auth'
 const user = {
   state: {
     token: getToken(),
-    name: ''
+    name: '',
+    avatar: ''
   },
 
   mutations: {
@@ -13,6 +14,9 @@ const user = {
     },
     SET_NAME: (state, name) => {
       state.name = name
+    },
+    SET_AVATAR: (state, avatar) => {
+      state.avatar = avatar
     }
   },
 
