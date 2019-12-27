@@ -6,3 +6,13 @@ export function getUserInfo() {
     method: 'post'
   })
 }
+
+export function updateUserInfo(name) {
+  return request({
+    url: 'user/updateInfo',
+    method: 'post',
+    data: {
+      name
+    }
+  })
+}
