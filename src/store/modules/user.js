@@ -35,17 +35,6 @@ const user = {
       })
     },
 
-    GetInfo({ commit }) {
-      return new Promise((resolve, reject) => {
-        getInfo().then(response => {
-          commit('SET_NAME', response.data.name)
-          resolve()
-        })
-      }).catch(error => {
-        reject(error)
-      })
-    },
-
     Logout({ commit }) {
       return new Promise(resolve => {
         commit('SET_TOKEN', '')

@@ -6,8 +6,8 @@ Vue.use(Router)
 
 export default new Router({
   routes: [
-    {path: '/login', component: () => import('@/views/login/index.vue')},
-    {path: '/register', component: () => import('@/views/register/index.vue')},
+    {path: '/login', component: () => import('@/views/login/index')},
+    {path: '/register', component: () => import('@/views/register/index')},
     {
       path: '',
       component: Layout,
@@ -15,7 +15,7 @@ export default new Router({
       children: [{
         path: 'home',
         name: 'home',
-        component: () => import('@/components/Test.vue'),
+        component: () => import('@/views/home/index'),
         meta: {title: '首页', icon: 'home'}
       }]
     }
