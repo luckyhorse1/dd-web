@@ -18,7 +18,26 @@ export default new Router({
         component: () => import('@/views/home/index'),
         meta: {title: '首页', icon: 'home'}
       }]
+    },
+    {
+      path: '/userSpace',
+      component: Layout,
+      redirect: '/userSpace/userInfo',
+      name: 'userSpace',
+      meta: {title: '个人中心', icon: 'userSpace'},
+      children: [
+        {
+          path: 'userInfo',
+          name: 'userInfo',
+          component: () => import('@/views/userSpace/userInfo/index'),
+          meta: {title: '个人信息', icon: 'userInfo'}
+        },
+        {
+          path: 'userAccount',
+          name: 'userAccount',
+          component: () => import('@/views/userSpace/userAccount/index'),
+          meta: {title: '账户信息', icon: 'userAccount'}
+        }]
     }
-
   ]
 })
