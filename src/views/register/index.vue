@@ -46,7 +46,8 @@
 <script>
   import {isvalidPhone, isvalidPhonecode, isvalidPassword} from '../../utils/validate'
   import {Message} from 'element-ui'
-  import {getPhoneCode, checkPhoneCode, register} from '../../api/register'
+  import {register} from '../../api/register'
+  import {getPhoneCode} from '../../api/phoneCode'
 
   export default {
     name: 'register',

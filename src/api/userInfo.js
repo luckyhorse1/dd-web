@@ -16,3 +16,10 @@ export function updateUserInfo(name) {
     }
   })
 }
+
+export function updatePhone (newPhone) {
+  return request({
+    url: 'user/updatePhone?newPhone='+newPhone,
+    method: 'get'
+  })
+}
