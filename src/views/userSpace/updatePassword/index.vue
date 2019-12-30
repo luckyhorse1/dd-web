@@ -1,4 +1,9 @@
 <template>
-  <div>pass</div>
+  <update-pass-detail></update-pass-detail>
 </template>
-<script></script>
+<script>
+  import UpdatePassDetail from './components/UpdatePassDetail'
+  export default {
+    components: {UpdatePassDetail}
+  }
+</script>

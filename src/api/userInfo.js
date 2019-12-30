@@ -23,3 +23,10 @@ export function updatePhone (newPhone) {
     method: 'get'
   })
 }
+
+export function updatePass (newPass) {
+  return request({
+    url: 'user/updatePass?newPass='+newPass,
+    method: 'get'
+  })
+}
