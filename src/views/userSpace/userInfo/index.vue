@@ -14,9 +14,9 @@
       </el-form-item>
       <el-form-item label="性别：">
         <el-radio-group v-model="userInfo.sex">
-          <el-radio :label="0">男</el-radio>
-          <el-radio :label="1">女</el-radio>
-          <el-radio :label="2">私密</el-radio>
+          <el-radio label="0">男</el-radio>
+          <el-radio label="1">女</el-radio>
+          <el-radio label="2">私密</el-radio>
         </el-radio-group>
       </el-form-item>
       <el-form-item label="年龄: ">
@@ -42,7 +42,7 @@
     phone: '176-xxxx-xxxx',
     wx: '暂无',
     sex: 0,
-    age: '0',
+    age: 0,
     createtime: '2000-00-00'
   };
   export default {
@@ -61,11 +61,14 @@
           this.userInfo.phone = response.data[0]
           this.userInfo.name = response.data[1]
           this.userInfo.createtime = response.data[2]
+          this.userInfo.sex = response.data[3]
+          this.userInfo.age = response.data[4]
+          this.userInfo.wx = response.data[5]
         })
       },
 
       onSubmit() {
-        updateUserInfo(this.userInfo.name).then(response => {
+        updateUserInfo(this.userInfo.name, this.userInfo.sex, this.userInfo.age, this.userInfo.wx).then(response => {
           this.$message({
             message: '修改成功',
             type: 'success'
@@ -77,6 +80,4 @@
 </script>
 
 <style scoped>
-
 </style>
-

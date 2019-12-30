@@ -7,12 +7,15 @@ export function getUserInfo() {
   })
 }
 
-export function updateUserInfo(name) {
+export function updateUserInfo(name, sex, age, wx) {
   return request({
     url: 'user/updateInfo',
     method: 'post',
     data: {
-      name
+      name,
+      sex,
+      age,
+      wx
     }
   })
 }
