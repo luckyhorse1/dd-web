@@ -6,19 +6,19 @@
         <el-col :span="8">
           <div class="un-handle-item">
             <span class="font-medium">姓名</span>
-            <span style="float: right" class="color-danger">{{userInfo[1]}}</span>
+            <span style="float: right" class="color-danger">{{userInfo.name}}</span>
           </div>
         </el-col>
         <el-col :span="8">
           <div class="un-handle-item">
             <span class="font-medium">手机号</span>
-            <span style="float: right" class="color-danger">{{userInfo[0]}}</span>
+            <span style="float: right" class="color-danger">{{userInfo.phone}}</span>
           </div>
         </el-col>
         <el-col :span="8">
           <div class="un-handle-item">
             <span class="font-medium">微信账号</span>
-            <span style="float: right" class="color-danger">wx-adasd</span>
+            <span style="float: right" class="color-danger">{{userInfo.wx}}</span>
           </div>
         </el-col>
       </el-row>
@@ -26,19 +26,19 @@
         <el-col :span="8">
           <div class="un-handle-item">
             <span class="font-medium">性别</span>
-            <span style="float: right" class="color-danger">男</span>
+            <span style="float: right" class="color-danger">{{userInfo.sex}}</span>
           </div>
         </el-col>
         <el-col :span="8">
           <div class="un-handle-item">
             <span class="font-medium">年龄</span>
-            <span style="float: right" class="color-danger">24</span>
+            <span style="float: right" class="color-danger">{{userInfo.age}}</span>
           </div>
         </el-col>
         <el-col :span="8">
           <div class="un-handle-item">
             <span class="font-medium">注册日期</span>
-            <span style="float: right" class="color-danger">{{userInfo[2]}}</span>
+            <span style="float: right" class="color-danger">{{userInfo.createtime}}</span>
           </div>
         </el-col>
       </el-row>
@@ -48,12 +48,19 @@
 
 <script>
   import {getUserInfo} from '../../api/userInfo'
-
+  const defaultUserInfo = {
+    phone: '',
+    name: '',
+    createtime: '',
+    sex: '',
+    age: '',
+    wx: ''
+  }
   export default {
     name: 'home',
     data() {
       return {
-        userInfo: ['暂无', '暂无', '暂无']
+        userInfo: Object.assign({}, defaultUserInfo)
       }
     },
     created () {
@@ -62,7 +69,18 @@
     methods: {
       getUserInfo() {
         getUserInfo().then(response => {
-          this.userInfo = response.data
+          this.userInfo.phone = response.data[0]
+          this.userInfo.name = response.data[1]
+          this.userInfo.createtime = response.data[2]
+          if (response.data[3] == 0) {
+            this.userInfo.sex = '男'
+          } else if (response.data[3] == 1) {
+            this.userInfo.sex = '女'
+          } else {
+            this.userInfo.sex = '私密'
+          }
+          this.userInfo.age = response.data[4]
+          this.userInfo.wx = response.data[5]
         })
       }
     }
