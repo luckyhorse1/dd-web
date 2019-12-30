@@ -33,10 +33,16 @@ export default new Router({
           meta: {title: '个人信息', icon: 'userInfo'}
         },
         {
-          path: 'userAccount',
-          name: 'userAccount',
-          component: () => import('@/views/userSpace/userAccount/index'),
-          meta: {title: '账户信息', icon: 'userAccount'}
+          path: 'updatePhone',
+          name: 'updatePhone',
+          component: () => import('@/views/userSpace/updatePhone/index'),
+          meta: {title: '修改手机号', icon: 'updatePhone'}
+        },
+        {
+          path: 'updatePassword',
+          name: 'updatePassword',
+          component: () => import('@/views/userSpace/updatePassword/index'),
+          meta: {title: '修改密码', icon: 'updatePassword'}
         }]
     }
   ]
