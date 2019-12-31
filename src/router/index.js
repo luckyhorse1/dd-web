@@ -44,6 +44,33 @@ export default new Router({
           component: () => import('@/views/userSpace/updatePassword/index'),
           meta: {title: '修改密码', icon: 'updatePassword'}
         }]
+    },
+    {
+      path: '/taskSpace',
+      component: Layout,
+      redirect: '/taskSpace/taskAll',
+      name: 'taskSpace',
+      meta: {title: '任务中心', icon: 'taskSpace'},
+      children: [
+        {
+          path: 'taskAll',
+          name: 'taskAll',
+          component: () => import('@/views/taskSpace/taskAll/index'),
+          meta: {title: '任务大厅', icon: 'taskAll'}
+        },
+        {
+          path: 'taskComp',
+          name: 'taskComp',
+          component: () => import('@/views/taskSpace/taskComp/index'),
+          meta: {title: '公司任务', icon: 'taskComp'}
+        },
+        {
+          path: 'taskMe',
+          name: 'taskMe',
+          component: () => import('@/views/taskSpace/taskMe/index'),
+          meta: {title: '我的任务', icon: 'taskMe'}
+        }
+      ]
     }
   ]
 })
