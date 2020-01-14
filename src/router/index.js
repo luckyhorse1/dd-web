@@ -71,6 +71,33 @@ export default new Router({
           meta: {title: '我的任务', icon: 'taskMe'}
         }
       ]
+    },
+    {
+      path: '/compSpace',
+      component: Layout,
+      redirect: '/compSpace/compAll',
+      name: 'compSpace',
+      meta: {title: '公司中心', icon: 'compSpace'},
+      children: [
+        {
+          path: 'compAll',
+          name: 'compAll',
+          component: () => import('@/views/compSpace/compAll/index'),
+          meta: {title: '公司列表', icon: 'compAll'}
+        },
+        {
+          path: 'compApplyLog',
+          name: 'compApplyLog',
+          component: () => import('@/views/compSpace/compApplyLog/index'),
+          meta: {title: '申请记录', icon: 'compApplyLog'}
+        },
+        {
+          path: 'compMe',
+          name: 'compMe',
+          component: () => import('@/views/compSpace/compMe/index'),
+          meta: {title: '我的公司', icon: 'compMe'}
+        }
+      ]
     }
   ]
 })
