@@ -86,6 +86,12 @@ export default new Router({
           meta: {title: '公司列表', icon: 'compAll'}
         },
         {
+          path: 'compCreate',
+          name: 'compCreate',
+          component: () => import('@/views/compSpace/compCreate/index'),
+          meta: {title: '创建公司', icon: 'compCreate'},
+        },
+        {
           path: 'compApplyLog',
           name: 'compApplyLog',
           component: () => import('@/views/compSpace/compApplyLog/index'),
@@ -98,6 +104,6 @@ export default new Router({
           meta: {title: '我的公司', icon: 'compMe'}
         }
       ]
-    }
+    },
   ]
 })
